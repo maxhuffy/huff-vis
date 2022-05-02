@@ -1,10 +1,19 @@
 import { useState, useEffect } from 'react';
 import {db} from "./firebase-config"
-import {collection, getDocs, addDoc, updateDoc, doc, deleteDoc} from "firebase/firestore"
+import {collection, getDocs, addDoc, updateDoc, doc, deleteDoc, onSnapshot} from "firebase/firestore"
 import './App.css';
 
 function App() {
   
+  // //Listening...
+  // //THIS IS REALLY BAD CODE - Each instance is counting as multiple listeners...
+  // // onSnapshot doesn't look TOO intemidating, but wait before using it for realsies
+  // // Haha, we hit 2.7K operations since we have no idea what we're doing. Let's put this on the backburner
+  // const unsub = onSnapshot(doc(db, "todos", "Jt01yLIqllVVKMrxsYYf"), (doc) => {
+  //   //console.log("Current data: ", doc.data());
+  //   getTodos();
+  // }); 
+
   const [newTask, setNewTask] = useState("");
 
   const [todos, setTodos] = useState([]);
